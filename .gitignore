@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+# Package directories
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Environment variables 
+config.json
