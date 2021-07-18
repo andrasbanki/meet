@@ -92,11 +92,9 @@
         const getEvents = document.getElementById("getEvents");
         const events = document.getElementById("events");
         const getCalendarEvents = "https://7l0kebp6oh.execute-api.eu-central-1.amazonaws.com/dev/api/get-events";
-        console.log(getCalendarEvents)
         getEvents.onclick = function () {
           const { access_token } = JSON.parse(accessTokenElement.innerText);
           const eventRequest = getCalendarEvents + "/" + access_token;
-          console.log(access_token)
           fetch(eventRequest)
             .then(function (response) {
               return response.json();
