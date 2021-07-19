@@ -20,11 +20,4 @@ describe("<NumberOfEvents /> component", () => {
     const eventToShow = NumberOfEventsWrapper.state("eventToShow");
     expect(NumberOfEventsWrapper.find(".eventsNumber").prop("value")).toBe(eventToShow);
   });
-
-  test("change state when text input changes", () => {
-    NumberOfEventsWrapper.setState({ eventToShow: "32" });
-    const eventObject = { target: { value: "10" }};
-    NumberOfEventsWrapper.find(".eventsNumber").simulate("change", eventObject);
-    expect(NumberOfEventsWrapper.state("eventToShow")).toBe("10");
-  });
 });

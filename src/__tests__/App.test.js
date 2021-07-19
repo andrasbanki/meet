@@ -4,6 +4,7 @@ import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import NumberOfEvents from '../NumberOfEvents';
+import { waitFor } from "@testing-library/react";
 import { mockData } from '../mock-data';
 import { extractLocations, getEvents } from '../api';
 
@@ -45,6 +46,27 @@ describe('<App /> integration', () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  });
+
+  test("events.length is updated after user changes number of events", async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ eventToShow: "32", locations: "all" });
+    const eventObject = { target: { value: 1 }};
+    const NumberOfEventsComponent = AppWrapper.find(NumberOfEvents);
+    await NumberOfEventsComponent.find(".eventsNumber").simulate("change", eventObject);
+    await waitFor(() => {AppWrapper.update();
+    expect(AppWrapper.state("events").length).toBe(1);
+    });
+  });
+
+    test("NumberOfEvents state of app is updated after user changes number of events", async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ eventToShow: "32" });
+    const eventObject = { target: { value: "10" }};
+    const NumberOfEventsComponent = AppWrapper.find(NumberOfEvents);
+    NumberOfEventsComponent.find(".eventsNumber").simulate("change", eventObject);
+    expect(AppWrapper.state("numberOfEvents")).toBe("10");
     AppWrapper.unmount();
   });
 });
