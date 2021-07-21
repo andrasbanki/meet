@@ -14,17 +14,18 @@ class Event extends Component {
     return (
       <div className="event">
         <h1 className="eventName">{event.summary}</h1>
-        <p className="eventDate">{event.start.dateTime}, {event.start.timeZone}</p>
+        <p className="eventDate">{event.start.dateTime}</p>
+        <p>{event.start.timeZone}</p>
         <p className="eventLocation">{event.location}</p>
         {this.state.showHideDetails === true && (
         <p className="eventDetails">{event.description}</p>
-        )};
+        )}
         {this.state.showHideDetails === false && (
           <button className="showDetailsButton" onClick={() => this.handleButton()}>show details</button>
-        )};
+        )}
         {this.state.showHideDetails === true && (
           <button className="hideDetailsButton" onClick={() => this.handleButton()}>hide details</button>
-        )};
+        )}
       </div>
     );
   }
