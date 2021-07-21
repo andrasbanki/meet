@@ -18,7 +18,7 @@ class NumberOfEvents extends Component {
     const eventToShow = this.state.eventToShow;
     return (
       <div className="numberOfEvents">
-        <p>Number of events: </p>
+        <p>Number of Events:</p>
         <input
           type="text"
           className="eventsNumber"
