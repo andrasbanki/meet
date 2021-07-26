@@ -5,6 +5,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { extractLocations, getEvents } from './api';
+import { WarningAlert } from './Alert';
 
 class App extends Component {
   state = {
@@ -12,6 +13,7 @@ class App extends Component {
     locations: [],
     eventToShow: "32",
     currentCity: "all",
+    warningText: ""
   }
 
   componentDidMount() {
@@ -19,7 +21,19 @@ class App extends Component {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        this.setState({ events: events.slice(0, eventToShow), locations: extractLocations(events) });
+        this.setState({ 
+          events: events.slice(0, eventToShow),
+          locations: extractLocations(events) 
+        });
+      }
+      if (navigator.online) {
+        this.setState({
+          warningText: "It looks like you are offline. Don't worry, you can still see your events.",
+        });
+      } else {
+        this.setState({
+          warningText: ''
+        });
       }
     });
   }
@@ -57,6 +71,7 @@ class App extends Component {
           numberOfEvents={this.state.numberOfEvents} 
         />
         <NumberOfEvents updateNumberOfEvents={(e) => this.updateNumberOfEvents(e)} />
+        <WarningAlert text={this.state.warningText} />
         <EventList 
           events={this.state.events}
         />
