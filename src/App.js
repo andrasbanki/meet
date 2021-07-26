@@ -4,8 +4,9 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { extractLocations, getEvents } from './api';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { WarningAlert } from './Alert';
+//import WelcomeScreen from "./WelcomeScreen";
 
 class App extends Component {
   state = {
@@ -13,29 +14,37 @@ class App extends Component {
     locations: [],
     eventToShow: "32",
     currentCity: "all",
-    warningText: ""
+    warningText: "",
+//    showWelcomeScreen: undefined,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { eventToShow } = this.state;
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ 
-          events: events.slice(0, eventToShow),
-          locations: extractLocations(events) 
-        });
-      }
-      if (navigator.online) {
+    // const accessToken = localStorage.getItem('access_token');
+    // const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const code = searchParams.get("code");
+    // this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    // if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ 
+            events: events.slice(0, eventToShow),
+            locations: extractLocations(events),
+          });
+        }
+      });
+      if (!navigator.onLine) {
         this.setState({
           warningText: "It looks like you are offline. Don't worry, you can still see your events.",
         });
       } else {
         this.setState({
-          warningText: ''
+          warningText: "",
         });
-      }
-    });
+//      }  
+    }
   }
 
   componentWillUnmount(){
@@ -63,6 +72,8 @@ class App extends Component {
   }
 
   render() {
+  //  if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+
     return (
       <div className="App">
         <CitySearch 
@@ -72,9 +83,7 @@ class App extends Component {
         />
         <NumberOfEvents updateNumberOfEvents={(e) => this.updateNumberOfEvents(e)} />
         <WarningAlert text={this.state.warningText} />
-        <EventList 
-          events={this.state.events}
-        />
+        <EventList events={this.state.events}/>        
       </div>
     );
   }
