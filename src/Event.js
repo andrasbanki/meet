@@ -18,7 +18,10 @@ class Event extends Component {
         <p>{event.start.timeZone}</p>
         <p className="eventLocation">{event.location}</p>
         {this.state.showHideDetails === true && (
-        <p className="eventDetails">{event.description}</p>
+        <div className="eventDetails">
+          <h2>About event:</h2>
+          <p>{event.description}</p>
+        </div>
         )}
         {this.state.showHideDetails === false && (
           <button className="showDetailsButton" onClick={() => this.handleButton()}>show details</button>
