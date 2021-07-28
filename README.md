@@ -47,12 +47,17 @@ npm test -- --coverage
 
 ## User Stories:
 
-As a user, I should be able to filter events by city, so that I can see the list of events that take place in that city
-As a user, I should be able to show/hide an event’s details, so that I can see the details an event or I can hide them.
-As a user, I should be able to specify the number of events, so that I can see more events on the events list.  
-As a user, I should be able to use the app when offline, so that I don’t need internet connection to see the upcoming events.
-As a user, I should be able to add an app shortcut to my home screen, so that I can open my app quicker from my mobile device.
-As a user, I should be able to display a chart showing the number of upcoming events by city, so that I can search through the upcoming events in this selected city.
+-   As a user, I should be able to filter events by city, so that I can see the list of events that take place in that city
+
+-   As a user, I should be able to show/hide an event’s details, so that I can see the details an event or I can hide them.
+
+-   As a user, I should be able to specify the number of events, so that I can see more events on the events list.
+
+-   As a user, I should be able to use the app when offline, so that I don’t need internet connection to see the upcoming events.
+
+-   As a user, I should be able to add an app shortcut to my home screen, so that I can open my app quicker from my mobile device.
+
+-   As a user, I should be able to display a chart showing the number of upcoming events by city, so that I can search through the upcoming events in this selected city.
 
 ## FEATURE 1: FILTER EVENTS BY CITY
 
