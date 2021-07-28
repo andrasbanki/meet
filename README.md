@@ -1,6 +1,6 @@
 # Achievement 4 Project: Meet App
 
-![alt text](https://github.com/andrasbanki/andrasbanki/blob/main/readmePicture?raw=true)
+!(https://github.com/andrasbanki/meet/raw/main/public/readmePicture.png)
 
 ### Description
 
